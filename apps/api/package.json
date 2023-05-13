@@ -19,9 +19,15 @@
 	},
 	"homepage": "https://discord.js.org",
 	"dependencies": {
+		"@hapi/boom": "^10.0.1",
+		"cors": "^2.8.5",
+		"helmet": "^7.0.0",
+		"pino": "^8.14.1",
+		"polka": "^1.0.0-next.22",
 		"tslib": "^2.5.0"
 	},
 	"devDependencies": {
+		"@types/cors": "^2.8.13",
 		"@types/node": "18.16.9",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.40.0",

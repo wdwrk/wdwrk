@@ -1,0 +1,19 @@
+diff --git a/package.json b/package.json
+index b69d6de0124abaed79de8730cf0ad8971afbcedf..9dd896703af6a0e8a2b14e273c461618c090d598 100644
+--- a/package.json
++++ b/package.json
+@@ -3,12 +3,14 @@
+   "version": "1.0.0-next.22",
+   "repository": "lukeed/polka",
+   "description": "A micro web server so fast, it'll make you dance! :dancers:",
++  "type": "module",
+   "module": "build.mjs",
+   "types": "index.d.ts",
+   "main": "build.js",
+   "license": "MIT",
+   "exports": {
+     ".": {
++      "types": "./index.d.ts",
+       "import": "./build.mjs",
+       "require": "./build.js"
+     },
