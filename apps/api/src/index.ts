@@ -5,6 +5,8 @@ import helmet from 'helmet';
 import polka, { type Middleware } from 'polka';
 import { Env } from './env.js';
 import { logger } from './logger.js';
+import { registerRoute } from './route.js';
+import * as routes from './routes/routes.js';
 
 const app = polka({
 	onError(err, _, res, __) {
@@ -39,5 +41,9 @@ app
 		}),
 	)
 	.use(helmet({ contentSecurityPolicy: env.isProd ? undefined : false }) as Middleware);
+
+for (const route of Object.values(routes)) {
+	registerRoute(app, route);
+}
 
 app.listen(env.port, () => logger.info(`Listening on port ${env.port}`));

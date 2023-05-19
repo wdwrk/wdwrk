@@ -22,13 +22,17 @@
 		"@hapi/boom": "^10.0.1",
 		"cors": "^2.8.5",
 		"helmet": "^7.0.0",
+		"kysely": "^0.24.2",
+		"pg": "^8.10.0",
 		"pino": "^8.14.1",
 		"polka": "^1.0.0-next.22",
-		"tslib": "^2.5.0"
+		"tslib": "^2.5.0",
+		"zod": "^3.21.4"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.13",
 		"@types/node": "18.16.9",
+		"@types/pg": "^8.6.6",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.40.0",
 		"eslint-config-neon": "^0.1.47",

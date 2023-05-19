@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+index e90809cbc6cbf10252a6bf46997fd1807071c98e..c2877733d99acae5f9090cfbde36611186295da8 100644
+--- a/package.json
++++ b/package.json
+@@ -3,6 +3,7 @@
+   "version": "3.2.1",
+   "repository": "lukeed/trouter",
+   "description": "🐟 A fast, small-but-mighty, familiar ~fish~ router",
++  "type": "module",
+   "types": "index.d.ts",
+   "module": "index.mjs",
+   "main": "index.js",

@@ -4,6 +4,7 @@
 	"packageManager": "yarn@3.5.1",
 	"private": true,
 	"version": "0.0.0",
+	"type": "module",
 	"workspaces": [
 		"apps/*"
 	],
@@ -31,6 +32,7 @@
 		"typescript": "^5.0.4"
 	},
 	"resolutions": {
-		"polka@^1.0.0-next.22": "patch:polka@npm%3A1.0.0-next.22#./.yarn/patches/polka-npm-1.0.0-next.22-47d37fb811.patch"
+		"polka@^1.0.0-next.22": "patch:polka@npm%3A1.0.0-next.22#./.yarn/patches/polka-npm-1.0.0-next.22-47d37fb811.patch",
+		"trouter@^3.1.0": "patch:trouter@npm%3A3.2.1#./.yarn/patches/trouter-npm-3.2.1-447f429854.patch"
 	}
 }

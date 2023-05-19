@@ -5,7 +5,9 @@
 		"project": ["./tsconfig.eslint.json", "./apps/*/tsconfig.eslint.json", "./packages/*/tsconfig.eslint.json"]
 	},
 	"rules": {
-		"@typescript-eslint/consistent-type-definitions": ["error", "interface"]
+		"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+		"no-eq-null": "off",
+		"eqeqeq": ["error", "always", { "null": "ignore" }]
 	},
 	"ignorePatterns": ["**/dist/*"]
 }
