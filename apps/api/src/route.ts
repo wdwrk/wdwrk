@@ -1,4 +1,5 @@
 import type { Middleware, Polka } from 'polka';
+import { logger } from './logger.js';
 
 export interface Route {
 	handler: Middleware;
@@ -8,5 +9,6 @@ export interface Route {
 }
 
 export function registerRoute(app: Polka, route: Route): void {
+	logger.info({ path: route.path, method: route.method }, 'Registering route');
 	app[route.method](route.path, ...route.middleware, route.handler);
 }

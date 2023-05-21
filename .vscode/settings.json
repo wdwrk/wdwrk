@@ -1,3 +1,5 @@
 {
-	"typescript.tsdk": "node_modules/typescript/lib"
+	"typescript.tsdk": "node_modules/typescript/lib",
+	// https://github.com/prettier/prettier-vscode/issues/3000#issuecomment-1547290873
+	"prettier.prettierPath": "./node_modules/prettier"
 }

@@ -3,6 +3,7 @@ import { isBoom, Boom, notFound } from '@hapi/boom';
 import cors from 'cors';
 import helmet from 'helmet';
 import polka, { type Middleware } from 'polka';
+import { migrate } from './database.js';
 import { Env } from './env.js';
 import { logger } from './logger.js';
 import { registerRoute } from './route.js';
@@ -46,4 +47,5 @@ for (const route of Object.values(routes)) {
 	registerRoute(app, route);
 }
 
+await migrate();
 app.listen(env.port, () => logger.info(`Listening on port ${env.port}`));
