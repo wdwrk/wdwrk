@@ -3,9 +3,9 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build"],
-            "inputs": ["**/tsconfig.json", "src/**/*.ts"],
+			"inputs": ["**/tsconfig.json", "src/**/*.ts"],
 			"outputs": ["dist/**"],
-            "outputMode": "errors-only"
+			"outputMode": "errors-only"
 		},
 		"build:docker": {
 			"dependsOn": [],
@@ -14,7 +14,7 @@
 			"cache": false
 		},
 		"lint": {
-            "dependsOn": ["^build"],
+			"dependsOn": ["^build"],
 			"inputs": [
 				"**/.eslintignore",
 				"**/.eslintrc.json",
@@ -32,9 +32,9 @@
 				"next.config.js",
 				"vite.config.ts"
 			],
-            "outputMode": "errors-only"
+			"outputMode": "errors-only"
 		},
-        "format": {
+		"format": {
 			"dependsOn": ["^build"],
 			"inputs": [
 				"**/.eslintignore",
