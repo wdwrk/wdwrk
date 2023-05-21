@@ -1,9 +1,13 @@
 import { notFound } from '@hapi/boom';
+import type { ZodRecord, ZodString } from 'zod';
 import { z } from 'zod';
 import { db } from '../database.js';
 import { jsonParser } from '../middleware/jsonParser.js';
 import { validate } from '../middleware/validate.js';
 import type { Route } from '../route.js';
+
+const primitiveSchema = z.union([z.string(), z.number(), z.boolean()]);
+const timestampSchema = z.string().datetime().pipe(z.coerce.date());
 
 export const getLog: Route = {
 	method: 'get',
@@ -32,9 +36,9 @@ const putSchema = z
 					.object({
 						level: z.string(),
 						message: z.string().nullable(),
-						timestamp: z.date(),
+						timestamp: timestampSchema,
 					})
-					.catchall(z.record(z.string(), z.unknown())),
+					.catchall(primitiveSchema),
 			)
 			.min(1)
 			.max(100),
@@ -68,37 +72,32 @@ export const putLogs: Route = {
 	},
 };
 
-const primitiveSchema = z.union([z.string(), z.number(), z.boolean()]);
-
-const baseParamQueryParamSchema = z.record(
-	z.string(),
-	z.union([
-		z
-			.object({
-				equals: primitiveSchema.nullish(),
-			})
-			.strict(),
-		z
-			.object({
-				equalsNot: primitiveSchema.nullish(),
-			})
-			.strict(),
-		z
-			.object({
-				includes: z.string().optional(),
-				includesNot: z.string().optional(),
-			})
-			.strict()
-			.refine((data) => data.includes != null || data.includesNot != null),
-		z
-			.object({
-				gt: z.number().optional(),
-				lt: z.number().optional(),
-			})
-			.strict()
-			.refine((data) => data.gt != null || data.lt != null),
-	]),
-);
+const baseParamQueryParamSchema = z.union([
+	z
+		.object({
+			equals: primitiveSchema.nullish(),
+		})
+		.strict(),
+	z
+		.object({
+			equalsNot: primitiveSchema.nullish(),
+		})
+		.strict(),
+	z
+		.object({
+			includes: z.string().optional(),
+			includesNot: z.string().optional(),
+		})
+		.strict()
+		.refine((data) => data.includes != null || data.includesNot != null),
+	z
+		.object({
+			gt: z.number().optional(),
+			lt: z.number().optional(),
+		})
+		.strict()
+		.refine((data) => data.gt != null || data.lt != null),
+]);
 
 type QueryParam = z.infer<typeof baseParamQueryParamSchema> & {
 	[key: string]: QueryParam;
@@ -107,20 +106,17 @@ type QueryParam = z.infer<typeof baseParamQueryParamSchema> & {
 const paramQuerySchema = z.record(
 	z.string(),
 	z.union([baseParamQueryParamSchema, z.lazy(() => paramQuerySchema)]),
-) as z.ZodType<QueryParam>;
+) as ZodRecord<ZodString, z.ZodType<QueryParam[string]>>;
 
-const querySchema = z.intersection(
-	z
-		.object({
-			start: z.date(),
-			end: z.date().default(() => new Date()),
-			limit: z.number().int().min(1).max(100).default(100),
-		})
-		.strict(),
-	paramQuerySchema,
-);
+const querySchema = z
+	.object({
+		start: timestampSchema,
+		end: timestampSchema.default(() => new Date().toISOString()),
+		limit: z.number().int().min(1).max(100).default(100),
+	})
+	.catchall(paramQuerySchema.valueSchema);
 
-type QueryBody = z.infer<typeof querySchema>;
+type QueryBody = z.infer<typeof paramQuerySchema> & z.infer<typeof querySchema>;
 
 function checkQuery(schema: QueryParam[string], data: unknown): boolean {
 	const { equals, equalsNot, includes, includesNot, gt, lt, ...rest } = schema;
@@ -191,7 +187,6 @@ export const queryLogs: Route = {
 	method: 'post',
 	path: '/logs/query',
 	middleware: [jsonParser(), validate('body', querySchema)],
-	// TODO: Ideally, if possible, the JSON querying would be done via SQL (along with the limitting as a consequence).
 	async handler(req, res) {
 		const { start, end, limit, ...params } = req.body as QueryBody;
 
@@ -200,15 +195,11 @@ export const queryLogs: Route = {
 			.selectAll()
 			.where('timestamp', '>=', start)
 			.where('timestamp', '<=', end)
-			.orderBy('timestamp', 'desc');
+			.orderBy('timestamp', 'asc');
 
 		const hasParams = Object.keys(params).length > 0;
 
-		if (!hasParams) {
-			query.limit(limit);
-		}
-
-		const selected = await query.execute();
+		const selected = await (hasParams ? query : query.limit(limit)).execute();
 		const final = hasParams ? [] : selected;
 
 		if (hasParams) {
