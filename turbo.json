@@ -7,6 +7,12 @@
 			"outputs": ["dist/**"],
             "outputMode": "errors-only"
 		},
+		"build:docker": {
+			"dependsOn": [],
+			"inputs": ["**/tsconfig.json", "**/package.json", "Dockerfile", ".dockerignore", "src/**/*.ts", "yarn.lock"],
+			"outputs": [],
+			"cache": false
+		},
 		"lint": {
             "dependsOn": ["^build"],
 			"inputs": [

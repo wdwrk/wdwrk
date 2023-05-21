@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: 'wdwrk'
+      POSTGRES_PASSWORD: 'admin'
+      POSTGRES_DB: 'wdwrk'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${POSTGRES_PORT}:5432
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U wdwrk']
+      interval: 10s
+      timeout: 5s
+
+  api:
+    image: wdwrk/api
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_HOST: 'postgres'
+      POSTGRES_PORT: '5432'
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+    name: 'wdwrk-postgres-data'

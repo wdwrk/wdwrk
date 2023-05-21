@@ -1,10 +1,15 @@
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 import { Kysely, PostgresDialect, type Generated, Migrator, FileMigrationProvider } from 'kysely';
-import { Pool } from 'pg';
 import { Env } from './env.js';
 import { logger } from './logger.js';
+
+// no proper ESM support
+const {
+	default: { Pool },
+} = await import('pg');
 
 export interface LogTable {
 	id: Generated<number>;
@@ -38,7 +43,7 @@ export async function migrate(): Promise<void> {
 		provider: new FileMigrationProvider({
 			fs,
 			path,
-			migrationFolder: 'migrations',
+			migrationFolder: path.join(path.dirname(fileURLToPath(import.meta.url)), 'migrations'),
 		}),
 	});
 

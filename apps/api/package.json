@@ -4,8 +4,11 @@
 	"description": "wdwrk API",
 	"scripts": {
 		"build": "tsc",
+		"build:docker": "yarn docker build --buildkit @wdwrk/api -t wdwrk/api:latest",
+		"build:docker-push": "yarn docker build --buildkit @wdwrk/api -t wdwrk/api:latest --push",
 		"lint": "prettier --check . && cross-env TIMING=1 eslint src --ext .mjs,.js,.ts --format=pretty",
-		"format": "prettier --write . && cross-env TIMING=1 eslint src --ext .mjs,.js,.ts --fix --format=pretty"
+		"format": "prettier --write . && cross-env TIMING=1 eslint src --ext .mjs,.js,.ts --fix --format=pretty",
+		"prepack": "yarn build && yarn lint"
 	},
 	"type": "module",
 	"main": "./dist/index.js",
@@ -23,22 +26,22 @@
 		"cors": "^2.8.5",
 		"helmet": "^7.0.0",
 		"kysely": "^0.24.2",
-		"pg": "^8.10.0",
+		"pg": "^8.11.0",
 		"pino": "^8.14.1",
 		"polka": "^1.0.0-next.22",
-		"tslib": "^2.5.0",
+		"tslib": "^2.5.2",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.13",
-		"@types/node": "18.16.9",
+		"@types/node": "18.16.13",
 		"@types/pg": "^8.6.6",
 		"cross-env": "^7.0.3",
-		"eslint": "^8.40.0",
+		"eslint": "^8.41.0",
 		"eslint-config-neon": "^0.1.47",
 		"eslint-formatter-pretty": "^5.0.0",
 		"prettier": "^2.8.8",
-		"turbo": "^1.9.4",
+		"turbo": "^1.9.8",
 		"typescript": "^5.0.4"
 	}
 }
