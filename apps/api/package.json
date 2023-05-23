@@ -14,13 +14,12 @@
 	"main": "./dist/index.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/discordjs/discord.js.git",
-		"directory": "packages/proxy-container"
+		"url": "https://github.com/wdwrk/wdwrk.git",
+		"directory": "apps/api"
 	},
 	"bugs": {
-		"url": "https://github.com/discordjs/discord.js/issues"
+		"url": "https://github.com/wdwrk/wdwrk/issues"
 	},
-	"homepage": "https://discord.js.org",
 	"dependencies": {
 		"@hapi/boom": "^10.0.1",
 		"cors": "^2.8.5",
@@ -34,8 +33,8 @@
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.13",
-		"@types/node": "18.16.13",
-		"@types/pg": "^8.6.6",
+		"@types/node": "18.16.14",
+		"@types/pg": "^8.10.1",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.41.0",
 		"eslint-config-neon": "^0.1.47",

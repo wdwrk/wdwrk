@@ -7,6 +7,18 @@
 			"outputs": ["dist/**"],
 			"outputMode": "errors-only"
 		},
+		"@wdwrk/frontend#build": {
+			"dependsOn": ["^build"],
+			"inputs": [
+				"src/**/*.tsx",
+				"src/**/*.ts",
+				"src/**/*.css",
+				"!src/styles/unocss.css",
+				"next.config.js"
+			],
+			"outputs": [".next/**", "!.next/cache/**"],
+			"outputMode": "full"
+		},
 		"build:docker": {
 			"dependsOn": [],
 			"inputs": ["**/tsconfig.json", "**/package.json", "Dockerfile", ".dockerignore", "src/**/*.ts", "yarn.lock"],
