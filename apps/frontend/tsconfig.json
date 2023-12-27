@@ -18,7 +18,8 @@
 		"paths": {
 			"~/*": ["./src/*"]
 		},
-		"moduleResolution": "node",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true

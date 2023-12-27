@@ -1,7 +1,7 @@
 {
 	"name": "wdwrk",
 	"description": "soonTM",
-	"packageManager": "yarn@3.5.1",
+	"packageManager": "yarn@4.0.2",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -25,12 +25,12 @@
 		"update": "yarn upgrade-interactive"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.3",
-		"@commitlint/config-angular": "^17.6.3",
+		"@commitlint/cli": "^18.4.3",
+		"@commitlint/config-angular": "^18.4.3",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
-		"turbo": "^1.9.8",
-		"typescript": "^5.0.4"
+		"turbo": "^1.11.2",
+		"typescript": "^5.3.3"
 	},
 	"resolutions": {
 		"polka@^1.0.0-next.22": "patch:polka@npm%3A1.0.0-next.22#./.yarn/patches/polka-npm-1.0.0-next.22-47d37fb811.patch",

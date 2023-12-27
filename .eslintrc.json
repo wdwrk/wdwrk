@@ -9,5 +9,5 @@
 		"no-eq-null": "off",
 		"eqeqeq": ["error", "always", { "null": "ignore" }]
 	},
-	"ignorePatterns": ["**/dist/*"]
+	"ignorePatterns": ["**/dist/*", "**/components/ui/*"]
 }

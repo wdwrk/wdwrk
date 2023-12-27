@@ -23,24 +23,24 @@
 	"dependencies": {
 		"@hapi/boom": "^10.0.1",
 		"cors": "^2.8.5",
-		"helmet": "^7.0.0",
-		"kysely": "^0.24.2",
-		"pg": "^8.11.0",
-		"pino": "^8.14.1",
+		"helmet": "^7.1.0",
+		"kysely": "^0.26.3",
+		"pg": "^8.11.3",
+		"pino": "^8.17.2",
 		"polka": "^1.0.0-next.22",
-		"tslib": "^2.5.2",
-		"zod": "^3.21.4"
+		"tslib": "^2.6.2",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
-		"@types/cors": "^2.8.13",
-		"@types/node": "18.16.14",
-		"@types/pg": "^8.10.1",
+		"@types/cors": "^2.8.17",
+		"@types/node": "20.10.5",
+		"@types/pg": "^8.10.9",
 		"cross-env": "^7.0.3",
-		"eslint": "^8.41.0",
-		"eslint-config-neon": "^0.1.47",
+		"eslint": "^8.56.0",
+		"eslint-config-neon": "^0.1.57",
 		"eslint-formatter-pretty": "^5.0.0",
-		"prettier": "^2.8.8",
-		"turbo": "^1.9.8",
-		"typescript": "^5.0.4"
+		"prettier": "^3.1.1",
+		"turbo": "^1.11.2",
+		"typescript": "^5.3.3"
 	}
 }

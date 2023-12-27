@@ -13,7 +13,6 @@
 				"src/**/*.tsx",
 				"src/**/*.ts",
 				"src/**/*.css",
-				"!src/styles/unocss.css",
 				"next.config.js"
 			],
 			"outputs": [".next/**", "!.next/cache/**"],
